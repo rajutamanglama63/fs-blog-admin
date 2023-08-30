@@ -41,7 +41,7 @@ const Navbar = ({ closed }: NavbarProps) => {
     <nav>
       <div className="flex justify-center p-3">
         {/* <img className="w-40" src="./logo.png" alt="admin-logo" /> */}
-        <h3 className="text-2xl font-bold">ADMIN</h3>
+        <h3 className={closed ? "invisible" : "text-2xl font-bold"}>ADMIN</h3>
       </div>
       <ul>
         <li>
