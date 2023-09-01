@@ -55,8 +55,8 @@ const Navbar = ({ closed }: NavbarProps) => {
         <li>
           <NavItem
             closed={closed}
-            to="/create-post"
-            value="Create post"
+            to="/create-blog"
+            value="Create blog"
             Icon={<AiFillFileAdd size={24} />}
           />
         </li>

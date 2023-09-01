@@ -33,7 +33,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
         </div>
         <div className="flex space-x-2">
           <Link
-            to={`/update-post/${blog.slug}`}
+            to={`/update-blog/${blog.slug}`}
             className="w-8 h-8 bg-blue-400 hover:bg-blue-600 flex justify-center items-center rounded-full text-white"
           >
             <BsPencilSquare />
