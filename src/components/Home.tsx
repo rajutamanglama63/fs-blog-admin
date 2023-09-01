@@ -55,7 +55,7 @@ const Home = () => {
             className={
               index === offset
                 ? "text-blue-500 border-2 border-blue-500 p-2 w-8 h-8 flex justify-center items-center"
-                : "text-gray-500  "
+                : "text-gray-500"
             }
           >
             {index + 1}
