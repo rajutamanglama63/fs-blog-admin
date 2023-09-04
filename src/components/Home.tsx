@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchBlogs } from "../reducers/blogReducer";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
+import { getCurrentUser } from "../utils/commonFunc";
+import SignupForm from "./SignupForm";
 
 interface blogState {
   successMsg: string;
@@ -27,6 +29,8 @@ const Home = () => {
   const fetchedBlogs: blogState = useSelector((state: any) => state.blog);
 
   const { blogData, total } = fetchedBlogs;
+
+  console.log("blogData: ", blogData);
 
   const getPaginationCount = (length: any) => {
     const division = length / limit;
@@ -50,13 +54,25 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchBlogs(limit, offset));
   }, [dispatch, limit, offset]);
+
+  const currentUser = getCurrentUser();
+
   return (
     <div>
-      <div className="grid grid-cols-3 gap-3">
-        {blogData?.map((blog) => (
-          <BlogCard key={blog.id} blog={blog} />
-        ))}
-      </div>
+      {currentUser !== null ? (
+        <>
+          <div className="grid grid-cols-3 gap-3">
+            {blogData?.map((blog) => (
+              <BlogCard key={blog.id} blog={blog} />
+            ))}
+          </div>
+        </>
+      ) : (
+        <>
+          <SignupForm />
+        </>
+      )}
+
       {/* <div className="py-5 flex justify-center items-center space-x-3">
         {paginationArr.map((_, index) => (
           <button

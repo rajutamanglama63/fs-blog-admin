@@ -21,3 +21,9 @@ export interface Blog {
     url: string;
   };
 }
+
+export interface author {
+  id: number;
+  fullName: string;
+  email: string;
+}
