@@ -1,8 +1,8 @@
 import client from "./client";
 
-export const getBlogs = async (limit: number, offset: number) => {
+export const signup = async (userData: object) => {
   try {
-    const { data } = await client.get(`/blog?limit=${limit}&offset=${offset}`);
+    const { data } = await client.post("/auth/signup", userData);
 
     return data;
   } catch (error) {
