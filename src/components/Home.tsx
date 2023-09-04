@@ -11,7 +11,7 @@ interface blogState {
   successMsg: string;
   errMsg: string;
   warningMsg: string;
-  blogData: [];
+  blogData: Blog[];
   total: any;
 }
 
@@ -19,25 +19,14 @@ const Home = () => {
   let offset = 0;
   const limit = 4;
 
-  const [blogs, setBlogs] = useState<Blog[]>([]);
-  const [totalBlogsCount, setTotalBlogsCount] = useState([]);
+  // const [blogs, setBlogs] = useState<Blog[]>([]);
+  // const [totalBlogsCount, setTotalBlogsCount] = useState([]);
 
   const dispatch = useDispatch<ThunkDispatch<any, any, AnyAction>>();
 
   const fetchedBlogs: blogState = useSelector((state: any) => state.blog);
 
-  // const fetchBlogs = async () => {
-  //   const response = await getBlogs(offset, limit);
-
-  //   console.log("moreblog: ", response);
-  //   setBlogs(response.data);
-  //   setTotalBlogsCount(response.total);
-  // };
-
-  if (fetchedBlogs.blogData.length) {
-    setBlogs(fetchedBlogs.blogData);
-    setTotalBlogsCount(fetchedBlogs.total);
-  }
+  const { blogData, total } = fetchedBlogs;
 
   const getPaginationCount = (length: any) => {
     const division = length / limit;
@@ -59,13 +48,12 @@ const Home = () => {
   // };
 
   useEffect(() => {
-    // fetchBlogs();
     dispatch(fetchBlogs(limit, offset));
-  }, []);
+  }, [dispatch, limit, offset]);
   return (
     <div>
       <div className="grid grid-cols-3 gap-3">
-        {blogs?.map((blog) => (
+        {blogData?.map((blog) => (
           <BlogCard key={blog.id} blog={blog} />
         ))}
       </div>

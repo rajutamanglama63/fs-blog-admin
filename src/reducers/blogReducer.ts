@@ -30,6 +30,7 @@ const blogSlice = createSlice({
         errMsg: resposneData.error,
         warningMsg: resposneData.message,
         blogData: resposneData.data,
+        total: resposneData.total,
       };
     },
   },
