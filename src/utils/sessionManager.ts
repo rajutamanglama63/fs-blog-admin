@@ -4,7 +4,7 @@ export const getCurrentUser = () => {
   const loggedInUser = window.localStorage.getItem("loggedInUser");
 
   if (loggedInUser && loggedInUser !== "undefined") {
-    const data: string | null = JSON.parse(loggedInUser)?.fullname;
+    const data: string | null = loggedInUser;
 
     if (data) {
       user = data;
@@ -12,4 +12,8 @@ export const getCurrentUser = () => {
   }
 
   return user;
+};
+
+export const setUser = (value: string) => {
+  window.localStorage.setItem("loggedInUser", value);
 };

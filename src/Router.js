@@ -6,11 +6,17 @@ import NotFound from "./components/NotFound";
 import SignupForm from "./components/SignupForm";
 import SigninForm from "./components/SigninForm";
 
-const Router = () => {
+const Router = ({ toggleNav, closedNav }) => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/create-blog" element={<CreatePost />} />
+      <Route
+        path="/"
+        element={<Home toggleNav={toggleNav} closedNav={closedNav} />}
+      />
+      <Route
+        path="/create-blog"
+        element={<CreatePost toggleNav={toggleNav} closedNav={closedNav} />}
+      />
       <Route path="/update-blog/:slug" element={<UpdatePost />} />
       <Route path="/signup" element={<SignupForm />} />
       <Route path="/signin" element={<SigninForm />} />

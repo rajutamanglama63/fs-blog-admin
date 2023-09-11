@@ -1,7 +1,12 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { userSignin } from "../reducers/authReducer";
+import { useDispatch } from "react-redux";
 
 const SigninForm = () => {
+  const dispatch: any = useDispatch();
+  const navigate = useNavigate();
+
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -21,8 +26,9 @@ const SigninForm = () => {
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("credentials: ", credentials);
+    dispatch(userSignin(credentials));
     clear();
+    navigate("/");
   };
   return (
     <div className="w-3/6 mx-auto mt-4">

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { AiFillFileAdd, AiOutlineHome } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 
@@ -36,17 +36,19 @@ const NavItem = ({ to, value, Icon, closed }: NavItemProps) => {
     </NavLink>
   );
 };
-const Navbar = ({ closed }: NavbarProps) => {
+
+const Navbar = ({ closedNav }: any) => {
   return (
     <nav>
       <div className="flex justify-center p-3">
-        {/* <img className="w-40" src="./logo.png" alt="admin-logo" /> */}
-        <h3 className={closed ? "invisible" : "text-2xl font-bold"}>ADMIN</h3>
+        <h3 className={closedNav ? "invisible" : "text-2xl font-bold"}>
+          ADMIN
+        </h3>
       </div>
       <ul>
         <li>
           <NavItem
-            closed={closed}
+            closed={closedNav}
             to="/"
             value="Home"
             Icon={<AiOutlineHome size={24} />}
@@ -54,7 +56,7 @@ const Navbar = ({ closed }: NavbarProps) => {
         </li>
         <li>
           <NavItem
-            closed={closed}
+            closed={closedNav}
             to="/create-blog"
             value="Create blog"
             Icon={<AiFillFileAdd size={24} />}
