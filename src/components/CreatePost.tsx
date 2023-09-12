@@ -21,7 +21,7 @@ const CreatePost = ({ toggleNav, closedNav }: any) => {
       </div>
 
       <div className="max-w-screen-lg mx-auto">
-        <h1>helo</h1>
+        <h1>Create Blog Form</h1>
       </div>
     </div>
   );

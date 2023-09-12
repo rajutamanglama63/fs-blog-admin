@@ -39,8 +39,8 @@ const NavItem = ({ to, value, Icon, closed }: NavItemProps) => {
 
 const Navbar = ({ closedNav }: any) => {
   return (
-    <nav>
-      <div className="flex justify-center p-3">
+    <nav className="sticky top-0">
+      <div className="flex justify-center p-3  ">
         <h3 className={closedNav ? "invisible" : "text-2xl font-bold"}>
           ADMIN
         </h3>
