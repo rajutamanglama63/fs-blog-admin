@@ -31,3 +31,18 @@ export const delBlog = async (id: number) => {
     return error;
   }
 };
+
+
+export const searchBlog = async (name: string, limit: number, offset: number) => {
+  try {
+    const {data} = await client.get(`/blog/search?name=${name}&limit=${limit}&offset=${offset}`, {withCredentials: true})
+
+    return data
+  } catch (error) {
+    const { response }: any = error;
+    if (response?.data) {
+      return response.data;
+    }
+    return error;
+  }
+}

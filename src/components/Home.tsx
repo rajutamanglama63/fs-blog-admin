@@ -4,8 +4,10 @@ import { useEffect } from "react";
 import BlogCard from "./BlogCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBlogs } from "../reducers/blogReducer";
+import { useSearch } from "../context/SearchProvider";
 
 const Home = ({ toggleNav, closedNav }: any) => {
+  const {searchResult} = useSearch()
   const dispatch: any = useDispatch();
   const blogs = useSelector((state: any) => state.blog);
   let limit = 9;
@@ -49,9 +51,10 @@ const Home = ({ toggleNav, closedNav }: any) => {
 
       <div className="max-w-screen-lg mx-auto">
         <div className="grid grid-cols-3 gap-3">
-          {blogs.blogData?.map((blog: any) => (
+          {searchResult.length ? searchResult.map((blog: any) => (<BlogCard key={blog.id} blog={blog} />)) : (blogs.blogData?.map((blog: any) => (
             <BlogCard key={blog.id} blog={blog} />
-          ))}
+          )))}
+          
         </div>
       </div>
     </div>
