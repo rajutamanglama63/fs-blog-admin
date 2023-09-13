@@ -1,5 +1,5 @@
-import { AnyAction, ThunkDispatch, createSlice } from "@reduxjs/toolkit";
-import { getBlogs } from "../api/blog";
+import { createSlice } from "@reduxjs/toolkit";
+import { delBlog, getBlogs } from "../api/blog";
 
 interface blogState {
   successMsg: string;
@@ -33,16 +33,42 @@ const blogSlice = createSlice({
         total: resposneData.total,
       };
     },
+    deleteBlog(state, action) {
+      const resposneData = action.payload;
+
+      return resposneData.affected === 1
+        ? {
+            ...state,
+            successMsg: "Successfully Deleted.",
+            errMsg: "",
+            warningMsg: "",
+          }
+        : {
+            ...state,
+            successMsg: "",
+            errMsg: "",
+            warningMsg: "Invalid attempt!",
+          };
+    },
   },
 });
 
-export const { setFetchBlogs } = blogSlice.actions;
+export const { setFetchBlogs, deleteBlog } = blogSlice.actions;
 
 export const fetchBlogs = (limit: number, offset: number) => {
-  return async (dispatch: ThunkDispatch<any, any, AnyAction>) => {
+  return async (dispatch: any) => {
     const blogs = await getBlogs(limit, offset);
 
     dispatch(setFetchBlogs(blogs));
   };
 };
+
+export const removeBlog = (blogId: number) => {
+  return async (dispatch: any) => {
+    const response = await delBlog(blogId);
+
+    dispatch(deleteBlog(response));
+  };
+};
+
 export default blogSlice.reducer;

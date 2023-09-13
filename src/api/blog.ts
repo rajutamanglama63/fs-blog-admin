@@ -15,3 +15,19 @@ export const getBlogs = async (limit: number, offset: number) => {
     return error;
   }
 };
+
+export const delBlog = async (id: number) => {
+  try {
+    const { data } = await client.delete(`/blog/${id}`, {
+      withCredentials: true,
+    });
+
+    return data;
+  } catch (error) {
+    const { response }: any = error;
+    if (response?.data) {
+      return response.data;
+    }
+    return error;
+  }
+};

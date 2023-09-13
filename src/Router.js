@@ -38,7 +38,11 @@ const Router = ({ toggleNav, closedNav }) => {
         path="/"
         element={
           loggedInUser !== null ? (
-            <Home toggleNav={toggleNav} closedNav={closedNav} />
+            <Home
+              toggleNav={toggleNav}
+              closedNav={closedNav}
+              setReload={setReload}
+            />
           ) : (
             <SigninForm />
           )
