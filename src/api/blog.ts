@@ -1,5 +1,21 @@
 import client from "./client";
 
+export const addBlog = async (blogData: any) => {
+  try {
+    const { data } = await client.post("/blog", blogData, {
+      withCredentials: true,
+    });
+
+    return data;
+  } catch (error) {
+    const { response }: any = error;
+    if (response?.data) {
+      return response.data;
+    }
+    return error;
+  }
+};
+
 export const getBlogs = async (limit: number, offset: number) => {
   try {
     const { data } = await client.get(`/blog?limit=${limit}&offset=${offset}`, {
@@ -32,12 +48,18 @@ export const delBlog = async (id: number) => {
   }
 };
 
-
-export const searchBlog = async (name: string, limit: number, offset: number) => {
+export const searchBlog = async (
+  name: string,
+  limit: number,
+  offset: number
+) => {
   try {
-    const {data} = await client.get(`/blog/search?name=${name}&limit=${limit}&offset=${offset}`, {withCredentials: true})
+    const { data } = await client.get(
+      `/blog/search?name=${name}&limit=${limit}&offset=${offset}`,
+      { withCredentials: true }
+    );
 
-    return data
+    return data;
   } catch (error) {
     const { response }: any = error;
     if (response?.data) {
@@ -45,4 +67,4 @@ export const searchBlog = async (name: string, limit: number, offset: number) =>
     }
     return error;
   }
-}
+};

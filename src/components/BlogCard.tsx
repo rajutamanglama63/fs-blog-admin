@@ -12,13 +12,6 @@ interface BlogCardProps {
 
 const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
   const dispatch: any = useDispatch();
-  let thumbnailUrl;
-  if (!blog) return null;
-  if (blog.thumbnail) {
-    if (blog.thumbnail.url) {
-      thumbnailUrl = blog.thumbnail.url;
-    }
-  }
 
   const delBlogHandler = async (id: number) => {
     await dispatch(removeBlog(id));
@@ -27,7 +20,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
     <div className="bg-white shadow-sm rounded flex flex-col">
       <img
         className="aspect-video"
-        src={thumbnailUrl || "./underwater.jpg"}
+        src={blog.thumbnail || "./underwater.jpg"}
         alt="blog.title"
       />
       <div className="p-2 flex-1 flex flex-col justify-between">
