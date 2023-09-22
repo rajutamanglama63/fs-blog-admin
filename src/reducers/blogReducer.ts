@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { delBlog, getBlogs } from "../api/blog";
+import { addBlog, delBlog, getBlogs } from "../api/blog";
 
 interface blogState {
   successMsg: string;
   errMsg: string;
   warningMsg: string;
-  blogData: [];
+  blogData: Object[];
   total: number;
 }
 
@@ -21,6 +21,20 @@ const blogSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    appendBlog(state, action) {
+      const responseData = action.payload;
+
+      // Create a new array by concatenating the existing blogData with the new data
+      const newBlogData: Object[] = state.blogData.concat(responseData);
+
+      return {
+        ...state,
+        successMsg: responseData.message,
+        errMsg: responseData.error,
+        warningMsg: responseData.message,
+        blogData: newBlogData,
+      };
+    },
     setFetchBlogs(state, action) {
       const resposneData = action.payload;
 
@@ -53,7 +67,15 @@ const blogSlice = createSlice({
   },
 });
 
-export const { setFetchBlogs, deleteBlog } = blogSlice.actions;
+export const { appendBlog, setFetchBlogs, deleteBlog } = blogSlice.actions;
+
+export const postBlog = (blogData: any) => {
+  return async (dispatch: any) => {
+    const response = await addBlog(blogData);
+
+    dispatch(appendBlog(response));
+  };
+};
 
 export const fetchBlogs = (limit: number, offset: number) => {
   return async (dispatch: any) => {

@@ -15,11 +15,8 @@ export interface Blog {
   title: string;
   updatedAt: string;
   updatedBy: string;
-  thumbnail: {
-    id: number;
-    publicId: string;
-    url: string;
-  };
+  thumbnail: string;
+  image: string;
 }
 
 export interface author {
